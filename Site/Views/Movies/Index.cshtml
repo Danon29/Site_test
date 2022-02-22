@@ -1,10 +1,10 @@
 ﻿@model Site.Models.MovieGenreViewModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Movie List";
 }
 
-<h1>Index</h1>
+<h1>Main Page</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -36,6 +36,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Movies[0].Price)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movies[0].Rating)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -54,6 +57,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rating)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
