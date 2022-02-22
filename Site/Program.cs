@@ -1,9 +1,23 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Site.Data;
+using Site.Models;
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<SiteContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SiteContext")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    SeedData.Initialize(services);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
